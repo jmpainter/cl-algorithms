@@ -16,32 +16,31 @@ class BinaryTreeNode {
   }
 }
 
-function isValid(root) {
-  const nodes = [{ node: root, lowerBound: -Infinity, upperBound: Infinity }];
+function findDepth(root) {
+  let maxDepth = 0;
+  const nodes = [{ node: root, depth: 1 }];
   while (nodes.length) {
-    const { node, lowerBound, upperBound } = nodes.shift();
-
-    if (node.value <= lowerBound || node.value > upperBound) {
-      return false;
+    const { node, depth } = nodes.pop();
+    if (depth > maxDepth) {
+      maxDepth = depth;
     }
     if (node.left) {
       nodes.push({
         node: node.left,
-        upperBound: node.value,
-        lowerBound
+        depth: depth + 1
       });
     }
     if (node.right) {
       nodes.push({
         node: node.right,
-        upperBound,
-        lowerBound: node.value
+        depth: depth + 1
       });
     }
   }
-  return true;
+  return maxDepth;
 }
-const myTree = new BinaryTreeNode(8);
+
+let myTree = new BinaryTreeNode(8);
 
 myTree.insertLeft(3);
 myTree.insertRight(10);
@@ -50,15 +49,21 @@ myTree.left.insertRight(6);
 myTree.right.insertLeft(9);
 myTree.right.insertRight(14);
 
-console.log(isValid(myTree));
+// console.log(dfs(myTree));
+console.log(findDepth(myTree));
 
-const myTree2 = new BinaryTreeNode(8);
+myTree = new BinaryTreeNode(4);
 
-myTree2.insertLeft(3);
-myTree2.insertRight(10);
-myTree2.left.insertLeft(1);
-myTree2.left.insertRight(6);
-myTree2.right.insertLeft(14);
-myTree2.right.insertRight(9);
+// console.log(dfs(myTree));
+console.log(findDepth(myTree));
 
-console.log(isValid(myTree2));
+myTree = new BinaryTreeNode(8);
+
+myTree.insertLeft(3);
+myTree.insertRight(10);
+myTree.left.insertLeft(1);
+myTree.left.insertRight(6);
+myTree.left.left.insertLeft(9);
+
+// console.log(dfs(myTree));
+console.log(findDepth(myTree));
