@@ -1,6 +1,5 @@
 function chooseMovies(movieTimes, flightTime) {
   const diffMap = {};
-  debugger;
   for (let time of movieTimes) {
     const diff = flightTime - time;
     if (diffMap[diff]) {
