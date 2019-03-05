@@ -1,12 +1,13 @@
 function mergeRanges(ranges) {
-  let rangesCopy = ranges.slice(0);
-
-  rangesCopy = ranges.sort((a, b) => a.startTime - b.startTime);
+  //make a copy
+  debugger;
+  const rangesCopy = ranges.slice(0).sort((a, b) => a.startTime - b.startTime);
   const newRanges = [ranges[0]];
+  let lastRange;
   rangesCopy.forEach((range, index) => {
     if (index > 0) {
+      lastRange = newRanges[newRanges.length - 1];
       // ranges overlap
-      const lastRange = newRanges[newRanges.length - 1];
       if (
         range.startTime <= lastRange.endTime &&
         range.endTime > lastRange.endTime
