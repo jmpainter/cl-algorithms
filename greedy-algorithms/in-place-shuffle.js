@@ -1,13 +1,15 @@
 function inPlaceShuffle(arr) {
   for (let i = 0; i < arr.length; i++) {
     const randomIndex = getRandom(i, arr.length);
-    const temp = arr[i];
-    arr[i] = arr[randomIndex];
-    arr[randomIndex] = temp;
+    if (randomIndex !== i) {
+      const temp = arr[i];
+      arr[i] = arr[randomIndex];
+      arr[randomIndex] = temp;
+    }
   }
+
   return arr;
 }
-
 function getRandom(floor, ceiling) {
   return Math.floor(Math.random() * (ceiling - floor)) + floor;
 }
