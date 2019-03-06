@@ -1,5 +1,6 @@
 function isPalindrome(string) {
   const map = {};
+
   for (let char of string) {
     if (!map[char]) {
       map[char] = 1;
@@ -7,9 +8,10 @@ function isPalindrome(string) {
       map[char]++;
     }
   }
+
   let oddCount = 0;
-  for (let key in map) {
-    if (map[key] % 2 === 1) {
+  for (let char in map) {
+    if (map[char] % 2 === 1) {
       oddCount++;
     }
   }
