@@ -1,42 +1,39 @@
 function highestProduct(arr) {
+  if (arr.length < 3) {
+    throw new Error('array must be at least length three');
+  }
+
   let highest = Math.max(arr[0], arr[1]);
   let lowest = Math.min(arr[0], arr[1]);
-
-  let highestProductOf2 = arr[0] * arr[1];
-  let lowestProductOf2 = arr[0] * arr[1];
-
-  let highestProductOf3 = arr[0] * arr[1] * arr[2];
+  let highestProductOfTwo = arr[0] * arr[1];
+  let lowestProductOfTwo = arr[0] * arr[1];
+  let highestProductOfThree = highest * lowest * arr[2];
 
   for (let i = 2; i < arr.length; i++) {
     const current = arr[i];
-
-    highestProductOf3 = Math.max(
-      highestProductOf2 * current,
-      lowestProductOf2 * current,
-      highestProductOf3
+    highestProductOfThree = Math.max(
+      highestProductOfThree,
+      highestProductOfTwo * current,
+      lowestProductOfTwo * current
     );
 
-    highestProductOf2 = Math.max(
-      highestProductOf2,
-      current * highest,
-      current * lowest
+    lowestProductOfTwo = Math.min(
+      lowestProductOfTwo,
+      lowest * current,
+      highest * current
     );
 
-    lowestProductOf2 = Math.min(
-      lowestProductOf2,
-      current * highest,
-      current * lowest
+    highestProductOfTwo = Math.min(
+      highestProductOfTwo,
+      highest * current,
+      lowest * current
     );
 
-    highest = Math.max(highest, current);
     lowest = Math.min(lowest, current);
+    highest = Math.max(lowest, current);
   }
 
-  return highestProductOf3;
-}
-
-function getProduct(arr) {
-  return arr.reduce((acc, ele) => acc * ele);
+  return highestProductOfThree;
 }
 
 let arr = [3, 5, 6, 33, 12, -45];
