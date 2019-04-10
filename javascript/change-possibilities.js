@@ -3,6 +3,7 @@ function changePossibilitiesTopDown(
   denominations,
   currentIndex = 0
 ) {
+  debugger;
   // Base cases:
   // We hit the amount spot on. yes!
   if (amountLeft === 0) return 1;
